@@ -413,14 +413,6 @@ def main():# {{{
             if q_flag.capitalize() == "S":
                 listarQuestoes()
 
-            print("Deseja listar uma tabela?(S/n)")
-            l_flag = input()
-
-            if l_flag.capitalize() == "S":
-                print("Insira tabela: ", end='')
-                table = input()
-                listarTabela(table)
-
             print("Deseja inserir dados em alguma tabela?(S/n)")
             i_flag = input()
 
@@ -442,6 +434,13 @@ def main():# {{{
                 condition = input()
                 removerTabela(table, condition)
 
+            print("Deseja listar uma tabela?(S/n)")
+            l_flag = input()
+
+            if l_flag.capitalize() == "S":
+                print("Insira tabela: ", end='')
+                table = input()
+                listarTabela(table)
             print("Deseja sair? (S/n)")
             quit = input()
 
