@@ -1,3 +1,5 @@
+limite_sup = 10
+
 def listarQuestoes(conexao):# {{{
     q1(conexao)
     q2(conexao)
@@ -12,7 +14,7 @@ def listarQuestoes(conexao):# {{{
 
 def q1(conexao):# {{{
 
-    print(">> Questão 1:\n")
+    print(">> Questão 1:")
     sql_entry = """ select *
                     from empregado
                     where endereco ilike '%Center'
@@ -34,13 +36,13 @@ def q1(conexao):# {{{
             print(buff[:-2])
 
         cursor.close()
-        print("\nNumber os tuples: ", len(resultado), "\n")
+        print("\nNumber os tuples:", len(resultado), "\n")
 
     except Exception as e:
         print ("Questão 1 falhou man: ", e)# }}}
 def q2(conexao):# {{{
 
-    print(">> Questão 2:\n")
+    print(">> Questão 2:")
     sql_entry = """ select codigo, descricao
 					from projeto
 					where departamento = 5 and local = 'Natal'
@@ -61,13 +63,13 @@ def q2(conexao):# {{{
             print(buff[:-2])
 
         cursor.close()
-        print("\nNumber os tuples: ", len(resultado), "\n")
+        print("\nNumber os tuples:", len(resultado), "\n")
 
     except Exception as e:
         print ("Questão 2 falhou man: ", e)# }}}
 def q3(conexao):# {{{
 
-    print(">> Questão 3:\n")
+    print(">> Questão 3:")
     sql_entry = """ select d.nome, local.nome
 					from local, departamento d
 					where d.codigo = local.departamento;
@@ -87,13 +89,13 @@ def q3(conexao):# {{{
             print(buff[:-2])
 
         cursor.close()
-        print("\nNumber os tuples: ", len(resultado), "\n")
+        print("\nNumber os tuples:", len(resultado), "\n")
 
     except Exception as e:
         print ("Questão 3 falhou man: ", e)# }}}
 def q4(conexao):# {{{
 
-    print(">> Questão 4:\n")
+    print(">> Questão 4:")
     sql_entry = """ select nome
 					from empregado
 					group by nome
@@ -115,13 +117,13 @@ def q4(conexao):# {{{
             print(buff[:-2])
 
         cursor.close()
-        print("\nNumber os tuples: ", len(resultado), "\n")
+        print("\nNumber os tuples:", len(resultado), "\n")
 
     except Exception as e:
         print ("Questão 4 falhou man: ", e)# }}}
 def q5(conexao):# {{{
 
-    print(">> Questão 5:\n")
+    print(">> Questão 5:")
     sql_entry = """ select
 					concat(emp.nome, ' ', emp.nomedomeio, '. ',emp.sobrenome) as name,
 					date_part('year',age(emp.dtnascimento)) as anos
@@ -149,13 +151,13 @@ def q5(conexao):# {{{
             print(buff[:-2])
 
         cursor.close()
-        print("\nNumber os tuples: ", len(resultado), "\n")
+        print("\nNumber os tuples:", len(resultado), "\n")
 
     except Exception as e:
         print ("Questão 5 falhou man: ", e)# }}}
 def q6a(conexao):# {{{
 
-    print(">> Questão 6a:\n")
+    print(">> Questão 6a:")
     sql_entry = """ select round(avg(num_dependentes.dependentes),2) as media
 					from
 					(select emp.codigo, count(dep.nome) as dependentes
@@ -178,13 +180,13 @@ def q6a(conexao):# {{{
             print(buff[:-2])
 
         cursor.close()
-        print("\nNumber os tuples: ", len(resultado), "\n")
+        print("\nNumber os tuples:", len(resultado), "\n")
 
     except Exception as e:
         print ("Questão 6a falhou man: ", e)# }}}
 def q6b(conexao):# {{{
 
-    print(">> Questão 6b:\n")
+    print(">> Questão 6b:")
     sql_entry = """ select round(avg(num_dependentes.dependentes),2) as media
 					from
 					(select emp.codigo, count(dep.nome) as dependentes
@@ -207,13 +209,13 @@ def q6b(conexao):# {{{
             print(buff[:-2])
 
         cursor.close()
-        print("\nNumber os tuples: ", len(resultado), "\n")
+        print("\nNumber os tuples:", len(resultado), "\n")
 
     except Exception as e:
         print ("Questão 6b falhou man: ", e)# }}}
 def q7(conexao):# {{{
 
-    print(">> Questão 7:\n")
+    print(">> Questão 7:")
     sql_entry = """ select depa.nome
 					from departamento as depa left outer join projeto as proj
 					on depa.codigo = proj.departamento
@@ -236,13 +238,13 @@ def q7(conexao):# {{{
             print(buff[:-2])
 
         cursor.close()
-        print("\nNumber os tuples: ", len(resultado), "\n")
+        print("\nNumber os tuples:", len(resultado), "\n")
 
     except Exception as e:
         print ("Questão 7 falhou man: ", e)# }}}
 def q8(conexao):# {{{
 
-    print(">> Questão 8:\n")
+    print(">> Questão 8:")
     sql_entry = """ select
 		    count(case when sexo = 'M' then sexo end) as qtdehomens,
                     count(case when sexo = 'F' then sexo end) as qtdemulheres
@@ -263,7 +265,7 @@ def q8(conexao):# {{{
             print(buff[:-2])
 
         cursor.close()
-        print("\nNumber os tuples: ", len(resultado), "\n")
+        print("\nNumber os tuples:", len(resultado), "\n")
 
     except Exception as e:
         print ("Questão 8 falhou man: ", e)# }}}

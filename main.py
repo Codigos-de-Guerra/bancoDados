@@ -5,9 +5,7 @@ from crud import *
 HOST = "localhost"
 DB = "empresa"
 USER = "postgres"
-PASSWORD = "123"
-
-limite_sup = 10
+PASSWORD = "postgres"
 
 def conectarBanco():# {{{
     try:
@@ -19,43 +17,51 @@ def conectarBanco():# {{{
 # }}}
 def main():# {{{
 
-    try:
-        conexao = conectarBanco()
+    while True:
+        try:
+            conexao = conectarBanco()
+        except:
+            print("Q")
+        print("Que operação deseja realizar? Insira a letra correspondente.")
+        print(">>> [C]: Para adicionar dados.\n>>> [R]: Para ler dados.")
+        print(">>> [U]: Para atualizar dados.\n>>> [D]: Para deletar dados.")
+        print(">>> [P] Para ver os relatórios pré-definidos.")
+        print(">>> [Q]: Se nenhuma operação for desejada e quiser sair.")
+        buff = "---" * 20 + "\n"
+        option = input(buff)
 
-        while True:
+        if option.capitalize() == "C":
+            table = input("Insira tabela: ")
+            values = input("Insira a nova tupla abaixo:\n")
+            inserirTabela(conexao,table, values)
 
-            q_flag = input("Deseja listar as questões? (S/n)")
+        elif option.capitalize() == "R":
+            table = input("Insira tabela: ")
+            listarTabela(conexao,table)
 
-            if q_flag.capitalize() == "S":
-                listarQuestoes(conexao)
+        elif option.capitalize() == "U":
+            table = input("Insira tabela: ")
+            att = input("Insira a atualização desejada:\n")
+            condition = input("Insira a condição de atualização: ")
+            atualizarTabela(conexao, table, att, condition)
 
-            i_flag = input("Deseja inserir dados em alguma tabela?(S/n)")
+        elif option.capitalize() == "D":
+            table = input("Insira tabela: ")
+            condition = input("Insira a condição de remoção: ")
+            removerTabela(conexao,table, condition)
 
-            if i_flag.capitalize() == "S":
-                table = input("Insira tabela: ", end='')
-                values = input("Insira a nova tupla abaixo:")
-                # print("A: ", values, "++")
-                inserirTabela(conexao,table, values)
+        elif option.capitalize() == "P":
+            listarQuestoes(conexao)
 
-            r_flag = input("Deseja remover dados de uma tabela?(S/n)")
+        elif option.capitalize() == "Q":
+            break
 
-            if r_flag.capitalize() == "S":
-                table = input("Insira tabela: ", end='')
-                condition = input("Insira a condição de remoção: ", end='')
-                removerTabela(conexao,table, condition)
+        quit = input("Continuar programa? (S/N)\n")
 
-            l_flag = input("Deseja listar uma tabela?(S/n)")
+        if quit.upper() == "N":
+            break
 
-            if l_flag.capitalize() == "S":
-                table = input("Insira tabela: ", end='')
-                listarTabela(conexao,table)
-            quit = input("Deseja sair? (S/n)")
-
-            if quit.capitalize() == "S":
-                break
-
-    finally:
-        if(conexao): conexao.close()
+    if(conexao): conexao.close()
 # }}}
 
 main()

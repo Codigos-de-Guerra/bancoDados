@@ -1,3 +1,5 @@
+limite_sup = 10
+
 def inserirTabela(conexao,tabela, values):# {{{
 
     values = values.split()
@@ -18,32 +20,12 @@ def inserirTabela(conexao,tabela, values):# {{{
         cursor.execute(sql_entry)
         conexao.commit()
         if (cursor.rowcount):
-            print ("Registro inserido com sucesso.")
+            print("Registro inserido com sucesso.")
 
         cursor.close()
 
     except Exception as e:
-        print ("Deu pra inserir não bicho: ", e)
-# }}}
-def removerTabela(conexao,tabela, condition):# {{{
-
-    print(">> Removendo da tabela: {}".format(tabela), "\n")
-    sql_entry = """ delete from {}
-                    where {};
-                """.format(tabela, condition)
-    try:
-        cursor = conexao.cursor()
-
-        # postgres_insert_query = """ DELETE FROM departamento WHERE codigo = 99"""
-        cursor.execute(sql_entry)
-        conexao.commit()
-        if (cursor.rowcount):
-            print ("Registro excluído com sucesso.")
-
-        cursor.close()
-
-    except Exception as e:
-        print ("Deu pra remover não man: ", e)
+        print("Deu pra inserir não bicho: ", e)
 # }}}
 def listarTabela(conexao, tabela):# {{{
 
@@ -66,8 +48,47 @@ def listarTabela(conexao, tabela):# {{{
             print(buff[:-2])
 
         cursor.close()
-        print("\nNumber os tuples: ", len(resultado), "\n")
+        print("\nNumber os tuples:", len(resultado), "\n")
 
     except Exception as e:
-        print ("Deu pra listar não manin: ", e)
+        print("Deu pra listar não manin: ", e)
+# }}}
+def atualizarTabela(conexao, tabela, att, condition):# {{{
+
+    print(">> Atualizando da tabela: {}".format(tabela), "\n")
+    sql_entry = """ update {}
+                    set {}
+                    where {};
+                """.format(tabela, att, condition)
+    try:
+        cursor = conexao.cursor()
+
+        cursor.execute(sql_entry)
+        conexao.commit()
+        if (cursor.rowcount):
+            print("Registro atualizado com sucesso.")
+
+        cursor.close()
+
+    except Exception as e:
+        print("Deu pra atualizar não bicho ;-;: ", e)
+# }}}
+def removerTabela(conexao,tabela, condition):# {{{
+
+    print(">> Removendo da tabela: {}".format(tabela), "\n")
+    sql_entry = """ delete from {}
+                    where {};
+                """.format(tabela, condition)
+    try:
+        cursor = conexao.cursor()
+
+        cursor.execute(sql_entry)
+        conexao.commit()
+        if (cursor.rowcount):
+            print("Registro excluído com sucesso.")
+
+        cursor.close()
+
+    except Exception as e:
+        print("Deu pra remover não man: ", e)
 # }}}
